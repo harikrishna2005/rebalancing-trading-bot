@@ -1,0 +1,7 @@
+services:
+  bot:
+    build: .
+    container_name: rebalancing_bot_container
+    restart: unless-stopped
+    # Use Portainer's "Environment Variables" UI to add your secrets!
+    # No need for .env file or volumes for basic setup
