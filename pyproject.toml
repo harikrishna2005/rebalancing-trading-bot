@@ -6,8 +6,9 @@ authors = [
     {name = "harikrishna2005@gmail.com"}
 ]
 readme = "README.md"
-requires-python = "3.12"
+requires-python = "^3.12"
 dependencies = [
+    "mqtt-connector-lib @ git+https://github.com/harikrishna2005/mqtt_connector_lib.git@redis_connector_develop"
 ]
 
 
