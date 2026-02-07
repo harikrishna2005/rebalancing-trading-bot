@@ -1,9 +1,9 @@
 import os
 import platform
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 def main():
-    load_dotenv()
+    # load_dotenv()
     print("========================================")
     print("🚀 BOT STARTUP SUCCESSFUL")
     print(f"📍 ARCHITECTURE: {platform.machine()}")
