@@ -1,3 +1,10 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+
 [project]
 name = "rebalancing-bot"
 version = "0.1.0"
@@ -12,6 +19,41 @@ dependencies = [
 ]
 
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+
+
+
+# In Poetry 2.0, optional dependencies for extras go here
+[tool.poetry.dependencies]
+pytest = { version = "^7.4.0", optional = true }
+pytest-asyncio = { version = "^0.21.0", optional = true }
+pytest-cov = { version = "^4.1.0", optional = true }
+
+
+
+
+[tool.poetry]
+packages = [
+    { include = "rebalancing_bot", from = "src" }
+]
+
+
+
+[tool.poetry.extras]
+test = ["pytest", "pytest-asyncio", "pytest-cov"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src"]
+
+
+#======= BOT STRUCTURE
+
+# rebalancing-trading-bot/
+# ├── pyproject.toml
+# ├── src/
+# │   └── rebalancing_bot/       <-- This must match the name in 'include'
+# │       ├── __init__.py        <-- Required to make it a package
+# │       └── main.py
+# └── tests/
+#     ├── __init__.py
+#     └── test_bot.py

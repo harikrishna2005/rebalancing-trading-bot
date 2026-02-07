@@ -1,0 +1,230 @@
+====After create git hub repo using GUI without readme follow below sTEPS=====
+STEP1 : pyporject.toml file initialization
+
+D:\A-7985\Hari\Personal\Python\Pycharm_projects>mkdir rebalancing-trading-bot
+
+D:\A-7985\Hari\Personal\Python\Pycharm_projects>cd rebalancing-trading-bot
+
+D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>poetry init
+
+This command will guide you through creating your pyproject.toml config.
+
+Package name [rebalancing-trading-bot]:  rebalancing_bot
+Version [0.1.0]:  0.1.0
+Description []:  Dynamic crypto rebalancing bot with MQTT and Redis support
+Author [A-7985 <hari.ambati@ibsplc.com>, n to skip]:  harikrishna2005@gmail.com
+License []:
+Compatible Python versions [>=3.12]:  3.12
+
+Would you like to define your main dependencies interactively? (yes/no) [yes] no
+Would you like to define your development dependencies interactively? (yes/no) [yes] no
+Generated file
+
+[project]
+name = "rebalancing-bot"
+version = "0.1.0"
+description = "Dynamic crypto rebalancing bot with MQTT and Redis support"
+authors = [
+    {name = "harikrishna2005@gmail.com"}
+]
+readme = "README.md"
+requires-python = "3.12"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+Do you confirm generation? (yes/no) [yes] yes
+D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>
+
+======  The above completes Initialization( above command create only "pyproject.toml"===
+
+STEP2 :  git init and push
+	a) Initialize the repo  (git init)
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git init
+	b) Manually copy the .gitignore file if it already exists to this folder
+	c) # 3. Initial commit
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git add .
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git commit -m "Initial commit: Poetry 2.0 project structure"
+			[master (root-commit) bc0983f] Initial commit: Poetry 2.0 project structure
+			2 files changed, 264 insertions(+)
+			create mode 100644 .gitignore
+			create mode 100644 pyproject.toml	
+	D) # 4. Connect to your new GitHub repository
+		# Replace YOUR_USERNAME with your actual GitHub username
+		# Below commands to run
+			git remote add origin https://github.com/harikrishna2005/rebalancing-trading-bot.git
+			git branch -M main
+			git push -u origin main
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git remote add origin https://github.com/harikrishna2005/rebalancing-trading-bot.git
+
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git branch -M main
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git push -u origin main
+			Enumerating objects: 4, done.
+			Counting objects: 100% (4/4), done.
+			Delta compression using up to 12 threads
+			Compressing objects: 100% (4/4), done.
+			Writing objects: 100% (4/4), 2.63 KiB | 1.31 MiB/s, done.
+			Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+			To https://github.com/harikrishna2005/rebalancing-trading-bot.git
+			* [new branch]      main -> main
+			branch 'main' set up to track 'origin/main'.
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>
+================================================================
+STEP3 : Adding default pependencies libraries to poetry
+	A) poetry add "mqtt-connector-lib @ git+https://github.com/harikrishna2005/mqtt_connector_lib.git@redis_connector_develop"
+	
+	B) create folder structure
+					:: Create the directory structure
+					mkdir src\rebalancing_bot               #  PACKAGE NAME  under src folde <rebalancing_bot>
+					mkdir tests
+					
+					:: Create the required __init__.py files to mark them as Python packages
+					type nul > src\rebalancing_bot\__init__.py
+					type nul > tests\__init__.py
+
+
+    C) Add below content manually
+
+
+
+# In Poetry 2.0, optional dependencies for extras go here
+[tool.poetry.dependencies]
+pytest = { version = "^7.4.0", optional = true }
+pytest-asyncio = { version = "^0.21.0", optional = true }
+pytest-cov = { version = "^4.1.0", optional = true }
+
+
+
+
+[tool.poetry]
+packages = [
+    { include = "rebalancing_bot", from = "src" }
+]
+
+
+
+[tool.poetry.extras]
+test = ["pytest", "pytest-asyncio", "pytest-cov"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src"]
+
+
+#======= BOT STRUCTURE
+
+# rebalancing-trading-bot/
+# ├── pyproject.toml
+# ├── src/
+# │   └── rebalancing_bot/       <-- This must match the name in 'include'
+# │       ├── __init__.py        <-- Required to make it a package
+# │       └── main.py
+# └── tests/
+#     ├── __init__.py
+#     └── test_bot.py
+
+
+
+	C) crete folders
+	
+
+    
+	
+=========================================================================
+	
+STEP 4: Commit all the changes that did till now
+
+		# 1. Check the status to see the changed files
+		git status
+		
+		# 2. Add the modified config and the new lock file
+		# (It is critical to include poetry.lock so others/Docker get the same versions)
+		git add pyproject.toml poetry.lock
+		
+		# 3. Commit the changes with a descriptive message
+		git commit -m "Add mqtt-connector-lib and core dependencies"
+		
+		# 4. Push the updates to the main branch on GitHub
+		git push origin main	
+
+
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git status
+			On branch main
+			Your branch is up to date with 'origin/main'.
+			
+			Changes not staged for commit:
+			(use "git add <file>..." to update what will be committed)
+			(use "git restore <file>..." to discard changes in working directory)
+					modified:   pyproject.toml
+			
+			Untracked files:
+			(use "git add <file>..." to include in what will be committed)
+					Project_starting_initialization.txt
+					poetry.lock
+			
+			no changes added to commit (use "git add" and/or "git commit -a")
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git add pyproject.toml poetry.lock
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git commit -m "Add mqtt-connector-lib and core dependencies"
+			[main 43ef387] Add mqtt-connector-lib and core dependencies
+			2 files changed, 293 insertions(+), 1 deletion(-)
+			create mode 100644 poetry.lock
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git push origin main
+			Enumerating objects: 6, done.
+			Counting objects: 100% (6/6), done.
+			Delta compression using up to 12 threads
+			Compressing objects: 100% (4/4), done.
+			Writing objects: 100% (4/4), 9.25 KiB | 4.63 MiB/s, done.
+			Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+			remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+			To https://github.com/harikrishna2005/rebalancing-trading-bot.git
+			bc0983f..43ef387  main -> main
+			
+			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>
+============================================			
+
+
+
+STEP 5:  Inoder to make SRC structure below is the final py projet
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "rebalancing-bot"
+version = "0.1.0"
+description = "Dynamic crypto rebalancing bot with MQTT and Redis support"
+authors = [
+    {name = "harikrishna2005@gmail.com"}
+]
+readme = "README.md"
+requires-python = "^3.12"
+dependencies = [
+    "mqtt-connector-lib @ git+https://github.com/harikrishna2005/mqtt_connector_lib.git@redis_connector_develop"
+]
+
+[tool.poetry]
+# This explicitly tells Poetry to include the 'rebalancing_bot' package from 'src'
+packages = [
+    { include = "rebalancing_bot", from = "src" }
+]
+
+
+[tool.poetry.extras]
+test = ["pytest", "pytest-asyncio", "pytest-cov"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src"]
