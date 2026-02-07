@@ -26,4 +26,4 @@ COPY --from=builder /app/src ./src
 COPY config.json ./
 
 # This will now work because 'rebalancing_bot' is installed in the .venv
-ENTRYPOINT ["python", "-m", "rebalancing_bot.main"]
+ENTRYPOINT ["python", "-m", "rebalancing_bot"]
