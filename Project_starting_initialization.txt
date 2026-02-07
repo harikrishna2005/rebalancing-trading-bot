@@ -89,6 +89,7 @@ STEP3 : Adding default pependencies libraries to poetry
 					:: Create the required __init__.py files to mark them as Python packages
 					type nul > src\rebalancing_bot\__init__.py
 					type nul > tests\__init__.py
+					echo # Rebalancing Bot > README.md
 
 
     C) Add below content manually
@@ -133,7 +134,10 @@ pythonpath = ["src"]
 
 
 
-	C) crete folders
+	C) run POETRY ENTRIES
+		poetry lock
+		poetry install --all-extras
+		poetry run python -c "import rebalancing_bot; print('Project installed successfully!')"
 	
 
     
@@ -153,7 +157,7 @@ STEP 4: Commit all the changes that did till now
 		git commit -m "Add mqtt-connector-lib and core dependencies"
 		
 		# 4. Push the updates to the main branch on GitHub
-		git push origin main	
+		git push origin main	 or git push
 
 
 			D:\A-7985\Hari\Personal\Python\Pycharm_projects\rebalancing-trading-bot>git status
