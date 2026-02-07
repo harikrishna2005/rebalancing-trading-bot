@@ -8,7 +8,10 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_CACHE_DIR=/tmp/poetry_cache
 
 # Install git (required to pull your mqtt-connector-lib from GitHub)
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# IMPORTANT: Added build-essential and python3-dev here for compiling C extensions (psutil, etc.)
+RUN apt-get update && \
+    apt-get install -y git build-essential python3-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -19,19 +22,20 @@ RUN pip install poetry
 COPY pyproject.toml poetry.lock README.md ./
 
 # Install dependencies without the project source code
+# This will now succeed because gcc is available to build psutil
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --no-root --all-extras
 
 # Stage 2: Runtime
 FROM python:3.12-slim-bookworm AS runtime
 
 # Set runtime env
-ENV VIRTUAL_ENV=/app/.venv \
-    PATH="/app/.venv/bin:$PATH" \
+ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
 # Copy the pre-built virtual environment from builder
+# We only copy the final compiled result, so the final image stays small
 COPY --from=builder /app/.venv /app/.venv
 
 # Copy your actual source code
