@@ -1,3 +1,19 @@
+# ******* running from the sheel *********
+# cd ~
+# rm -rf rebalancing-trading-bot
+# git clone -b dockerize_app --single-branch https://github.com/harikrishna2005/rebalancing-trading-bot.git
+# cd rebalancing-trading-bot
+# docker compose up -d --build --no-cache
+# docker compose down --rmi local
+# docker image prune -f
+#
+#
+# ===
+# docker compose build --no-cache
+# docker compose up -d
+
+
+
 # --- Stage 1: Build ---
 FROM python:3.12-slim-bookworm AS builder
 ENV POETRY_NO_INTERACTION=1 \
@@ -26,4 +42,5 @@ COPY --from=builder /app/src ./src
 COPY config.json ./
 
 # This will now work because 'rebalancing_bot' is installed in the .venv
-ENTRYPOINT ["python", "-m", "rebalancing_bot"]
+# ENTRYPOINT ["python", "-m", "rebalancing_bot"]
+ENTRYPOINT ["run-bot"]

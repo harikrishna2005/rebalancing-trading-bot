@@ -4,6 +4,7 @@ import platform
 
 def main():
     # load_dotenv()
+    print("UPDATED BOT STARTUP MESSAGE")
     print("========================================")
     print("🚀 BOT STARTUP SUCCESSFUL")
     print(f"📍 ARCHITECTURE: {platform.machine()}")

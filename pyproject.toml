@@ -19,6 +19,16 @@ dependencies = [
 ]
 
 
+[project.scripts]
+# This defines the command 'run-bot'
+run-bot = "rebalancing_bot.main:main"
+#       = "<package>.<module>:<function>"
+
+
+[tool.poetry]
+packages = [
+    { include = "rebalancing_bot", from = "src" }
+]
 
 
 
@@ -27,15 +37,6 @@ dependencies = [
 pytest = { version = "^7.4.0", optional = true }
 pytest-asyncio = { version = "^0.21.0", optional = true }
 pytest-cov = { version = "^4.1.0", optional = true }
-
-
-
-
-[tool.poetry]
-packages = [
-    { include = "rebalancing_bot", from = "src" }
-]
-
 
 
 [tool.poetry.extras]
