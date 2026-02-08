@@ -3,7 +3,9 @@
 # rm -rf rebalancing-trading-bot
 # git clone -b dockerize_app --single-branch https://github.com/harikrishna2005/rebalancing-trading-bot.git
 # cd rebalancing-trading-bot
-# docker compose up -d --build --no-cache
+# docker compose build --no-cache
+# docker compose up -d
+# *********** NOT REQUIRED --- docker compose up -d --build --no-cache
 # docker compose down --rmi local
 # docker image prune -f
 #
