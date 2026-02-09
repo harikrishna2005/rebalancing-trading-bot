@@ -243,16 +243,22 @@ STEP 6: GIT HUB Actions CI/CD pipeline creation
         # 2. Create a new workflow file (e.g., ci.yml) in that directory
         type nul > .github/workflows/ci.yml      # windows command
 
+        #2A .  From git hub UI, give workflow permisssion
+            goto github -> Exact Repo -> Settings -> Actions -> General -> Workflow permissions -> select "Read and write permissions" and save
+
         # 3. Add the following content to ci.yml to set up a basic CI pipeline
 name: Multi-Arch Build
 on:
   push:
-    branches: [ "main", "develop","dockerize_app", "staging", "rebalancing-trading-bot-develop" ] # Trigger on pushes to main, develop, dockerize_app and staging branches
+    branches: [ "main", "develop","dockerize_app", "staging", "rebalancing-trading-bot-develop" ]
     tags: [ "v*" ] # Trigger on version tags like v1.0.1
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -279,8 +285,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ github.repository }}:${{ github.ref_name }}
-            ghcr.io/${{ github.repository }}:latest
-
+#            ghcr.io/${{ github.repository }}:latest
+            ${{ github.ref_name == 'main' && format('ghcr.io/{0}:latest', github.repository) || '' }}
 
 
 
